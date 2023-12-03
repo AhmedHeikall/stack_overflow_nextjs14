@@ -1,7 +1,7 @@
 import React from "react";
 
 const AskQuestion = () => {
-  return <div>AskQuestion</div>;
+  return <section className="">AskQuestion</section>;
 };
 
 export default AskQuestion;

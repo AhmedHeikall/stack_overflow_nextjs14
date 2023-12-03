@@ -27,7 +27,7 @@ const MobileNav = () => {
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="background-light900_dark200 border-none"
+        className="background-light900_dark200 flex flex-col justify-between border-none"
       >
         {/* DevFlow Logo */}
         <Link href="/" className="flex items-center gap-1">

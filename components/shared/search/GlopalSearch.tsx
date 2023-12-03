@@ -16,9 +16,8 @@ const GlopalSearch = () => {
         />
         <Input
           type="text"
-          placeholder="Search for Questions Here..."
-          value=""
-          className="paragraph-regular no-focus placeholder background-light800_darkgradient border-none shadow-none outline-none"
+          placeholder="Search anything globally..."
+          className="paragraph-regular no-focus placeholder text-dark400_light700 background-light800_darkgradient border-none  shadow-none outline-none dark:placeholder:text-slate-400"
         />
       </div>
     </div>
