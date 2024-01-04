@@ -10,49 +10,11 @@ import { Button } from "@/components/ui/button";
 
 import { HomePageFilters } from "@/constants/filters";
 
-const QUESTIONS = [
-  {
-    _id: "1",
-    title: "Cascading Deletes in SQLAlchemy?",
-    tags: [
-      { _id: "1", name: "Python" },
-      { _id: "2", name: "SQL" },
-    ],
-    author: { _id: "1", name: "Ahmed Heikal", picture: "/path/to/picture.jpg" },
-    upvotes: 1000000,
-    views: 3000000,
-    answers: [],
-    createdAt: new Date("2023-11-01T12:00:00.000Z"),
-  },
-  {
-    _id: "2",
-    title: "Managing State in React?",
-    tags: [
-      { _id: "3", name: "React" },
-      { _id: "4", name: "State Management" },
-    ],
-    author: { _id: "2", name: "John Doe", picture: "/path/to/picture.jpg" },
-    upvotes: 50000,
-    views: 4000,
-    answers: [],
-    createdAt: new Date("2023-11-02T09:30:00.000Z"),
-  },
-  {
-    _id: "3",
-    title: "REST vs GraphQL: Pros and Cons",
-    tags: [
-      { _id: "5", name: "REST" },
-      { _id: "6", name: "GraphQL" },
-    ],
-    author: { _id: "3", name: "Jane Smith", picture: "/path/to/picture.jpg" },
-    upvotes: 20,
-    views: 5000,
-    answers: [],
-    createdAt: new Date("2023-11-03T15:45:00.000Z"),
-  },
-];
+import { getQuestions } from "@/lib/actions/question.action";
 
-const Home = () => {
+const Home = async () => {
+  const results = await getQuestions({});
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -82,8 +44,8 @@ const Home = () => {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {/* Looping throw questions */}
-        {QUESTIONS.length > 0 ? (
-          QUESTIONS.map((question) => (
+        {results.questions.length > 0 ? (
+          results.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
