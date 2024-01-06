@@ -6,8 +6,8 @@ import { redirect } from "next/navigation";
 
 const AskQuestion = async () => {
   // const { userId } = auth();
-  const userId = "12345";
 
+  const userId = "12345";
   if (!userId) redirect("/sign-in");
 
   const mongoUser = await getUserById({ userId });
