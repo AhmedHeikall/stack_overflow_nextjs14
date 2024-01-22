@@ -3,9 +3,9 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { createUser, updateUser, deleteUser } from "@/lib/actions/user.action";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
@@ -53,8 +53,6 @@ export async function POST(req: NextRequest) {
   // Get the event type
   const eventType = evt.type;
 
-  console.log({ eventType });
-
   // Handle the event
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, username, first_name, last_name } =
@@ -69,7 +67,7 @@ export async function POST(req: NextRequest) {
       picture: image_url,
     });
 
-    return NextResponse.json({ message: "OK", user: mongoUser });
+    return NextResponse.json({ status: 200, message: "OK", user: mongoUser });
   }
 
   if (eventType === "user.updated") {
@@ -88,7 +86,7 @@ export async function POST(req: NextRequest) {
       path: `/profile/${id}`,
     });
 
-    return NextResponse.json({ message: "OK", user: mongoUser });
+    return NextResponse.json({ status: 200, message: "OK", user: mongoUser });
   }
 
   if (eventType === "user.deleted") {
@@ -97,8 +95,8 @@ export async function POST(req: NextRequest) {
     // Delete a user in database
     const deletedUser = await deleteUser({ clerkId: id! });
 
-    return NextResponse.json({ message: "OK", user: deletedUser });
+    return NextResponse.json({ status: 200, message: "OK", user: deletedUser });
   }
 
-  return NextResponse.json({ message: "OK" });
+  return new Response("", { status: 200 });
 }
