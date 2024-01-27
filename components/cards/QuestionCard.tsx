@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import RenderTag from "../shared/tags/RenderTag";
 import Metric from "../shared/metric/Metric";
-
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 
 interface HomeCardQuestionProps {
@@ -80,7 +79,7 @@ const QuestionCard = ({
             imgUrl="/assets/icons/message.svg"
             alt="message"
             value={formatAndDivideNumber(answers.length)}
-            title=" Answers"
+            title="Answers"
             textStyles="small-medium text-dark400_light800"
           />
           <Metric

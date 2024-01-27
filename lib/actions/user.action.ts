@@ -2,13 +2,14 @@
 
 import User from "@/database/user.model";
 import { connectToDatabase } from "../mongoose";
+import { revalidatePath } from "next/cache";
 import {
   CreateUserParams,
   UpdateUserParams,
   DeleteUserParams,
   GetAllUsersParams,
 } from "./shared.types";
-import { revalidatePath } from "next/cache";
+
 // import Question from "@/database/question.model";
 
 export async function getUserById(params: any) {
@@ -96,12 +97,3 @@ export async function getAllUsers(params: GetAllUsersParams) {
     throw error;
   }
 }
-
-// export async function getAllUsers(params: GetAllUsersParams) {
-//   try {
-//     connectToDatabase();
-//   } catch (error) {
-//     console.log(error);
-//     throw error;
-//   }
-// }

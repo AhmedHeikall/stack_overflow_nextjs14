@@ -38,7 +38,7 @@ body {
   }
 
   .markdown {
-    @apply max-w-full prose dark:prose-p:text-light-700 dark:pros;
+    @apply max-w-full prose dark:prose-p:text-light-700 dark:prose-h3:text-light-700;
   }
 
   .primary-gradient {
@@ -116,26 +116,32 @@ code {
 word-break: break-all;
 /* Instead use this non-standard one: */
   word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  padding: 2px;
+  color: #ff7000 !important;
 }
-/* Adds a hyphen where the word breaks, if supported (No Blink) *
--ms-hyphens: auto;
+/* Adds a hyphen where the word breaks, if supported (No Blink) * */
+/* -ms-hyphens: auto;
 -moz-hyphens: auto;
 -webkit-hyphens: auto;
 hyphens: auto;
 padding: 2px;
 color: #ff7000 !important;
-}
+} */
 .markdown pre {
-display: grid;
-width: 100%;
+  display: grid;
+  width: 100%;
 }
 .markdown pre code {
-width: 100%;
-display: block;
-overflow-x: auto;
-color: inherit !important;
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+  color: inherit !important;
 }
-/* Markdown End */
+/* Markdown End
 /* Clerk */
 .cl-internal-b3fm6y {
   background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%);

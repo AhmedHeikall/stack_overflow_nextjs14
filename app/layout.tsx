@@ -1,9 +1,11 @@
 import React from "react";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ThemeProvider } from "@/context/Themeprovider";
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+
+import { ThemeProvider } from "@/context/Themeprovider";
 import "./globals.css";
+import "../styles/prism.css";
 
 const inter = Inter({
   subsets: ["latin"],

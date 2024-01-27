@@ -3,8 +3,13 @@
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
 import User from "@/database/user.model";
+
 import { connectToDatabase } from "../mongoose";
-import { GetQuestionsParams, CreateQuestionParams } from "./shared.types";
+import {
+  GetQuestionsParams,
+  CreateQuestionParams,
+  GetQuestionByIdParams,
+} from "./shared.types";
 import { revalidatePath } from "next/cache";
 
 export async function getQuestions(params: GetQuestionsParams) {
@@ -17,6 +22,29 @@ export async function getQuestions(params: GetQuestionsParams) {
       .sort({ createdAt: -1 });
 
     return { questions };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getQuestionById(params: GetQuestionByIdParams) {
+  try {
+    connectToDatabase();
+
+    const { questionId } = params;
+
+    const question = await Question.findById({ _id: questionId })
+      .populate({ path: "tags", model: Tag, select: "_id name" })
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id clerkId name picture",
+      });
+
+    if (!question) throw new Error("Question not fount!");
+
+    return question;
   } catch (error) {
     console.log(error);
     throw error;
@@ -58,5 +86,8 @@ export async function createQuestion(params: CreateQuestionParams) {
 
     // increment author's reputation by +5 for creation a question
     revalidatePath(path);
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 }
