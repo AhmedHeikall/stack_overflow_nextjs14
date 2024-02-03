@@ -6,12 +6,23 @@ import Metric from "@/components/shared/metric/Metric";
 import ParseHTML from "@/components/shared/parsehtml/ParseHTML";
 import RenderTag from "@/components/shared/tags/RenderTag";
 import Answer from "@/components/forms/Answer";
+import AllAnswers from "@/components/shared/allanswers/AllAnswers";
 
 import { getQuestionById } from "@/lib/actions/question.action";
 import { getTimestamp, formatAndDivideNumber } from "@/lib/utils";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import { getUserById } from "@/lib/actions/user.action";
 
 const QuestionDetails = async ({ params }: any) => {
   const question = await getQuestionById({ questionId: params.id });
+
+  // get userId and pass it to Answer form to know who made an answer
+  const { userId } = auth();
+
+  if (!userId) redirect("/sign-in");
+
+  const mongoUser = await getUserById({ userId });
 
   return (
     <>
@@ -80,8 +91,19 @@ const QuestionDetails = async ({ params }: any) => {
         ))}
       </div>
 
+      {/* all answers  */}
+      <AllAnswers
+        authorId={JSON.stringify(mongoUser._id)}
+        questionId={question._id}
+        totalAnswers={question.answers.length}
+      />
+
       {/* answer form */}
-      <Answer />
+      <Answer
+        authorId={JSON.stringify(mongoUser._id)}
+        questionId={JSON.stringify(question._id)}
+        question={question.content}
+      />
     </>
   );
 };
