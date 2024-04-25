@@ -10,7 +10,7 @@ import {
   GetAllUsersParams,
 } from "./shared.types";
 
-import Question from "@/database/question.model";
+// import Question from "@/database/question.model";
 
 export async function getUserById(params: any) {
   try {
@@ -67,13 +67,15 @@ export async function deleteUser(userData: DeleteUserParams) {
     // Delete user from database
     // and their questions, comments etc..
 
-    // get user Questions ids
-    const userQuestionsIds = await Question.find({ author: user._id }).distinct(
-      "_id"
-    );
+    // there is an error here XXXXXXXXXXXXXXXXX
 
-    // delete user questions
-    await Question.deleteMany({ author: user._id });
+    // get user Questions ids
+    // const userQuestionsIds = await Question.find({ author: user._id }).distinct(
+    //   "_id"
+    // );
+
+    // // delete user questions
+    // await Question.deleteMany({ author: user._id });
 
     // TODO: delete user answers, comments, etc.
     const deletedUser = await User.findByIdAndDelete({ clerkId });
