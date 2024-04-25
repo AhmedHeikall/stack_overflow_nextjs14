@@ -7,12 +7,13 @@ import ParseHTML from "@/components/shared/parsehtml/ParseHTML";
 import RenderTag from "@/components/shared/tags/RenderTag";
 import Answer from "@/components/forms/Answer";
 import AllAnswers from "@/components/shared/allanswers/AllAnswers";
+import Votes from "@/components/shared/votes/Votes";
 
 import { getQuestionById } from "@/lib/actions/question.action";
+import { getUserById } from "@/lib/actions/user.action";
 import { getTimestamp, formatAndDivideNumber } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { getUserById } from "@/lib/actions/user.action";
 
 const QuestionDetails = async ({ params }: any) => {
   const question = await getQuestionById({ questionId: params.id });
@@ -45,7 +46,18 @@ const QuestionDetails = async ({ params }: any) => {
             </p>
           </Link>
           {/* Voting System */}
-          <div className="flex justify-end">VOTING</div>
+          <div className="flex justify-end">
+            <Votes
+              type="question"
+              itemId={JSON.stringify(question._id)}
+              userId={JSON.stringify(mongoUser._id)}
+              upvotes={question.upvotes.length}
+              hasupVoted={question.upvotes.includes(mongoUser._id)}
+              downvotes={question.downvotes.length}
+              hasdownVoted={question.downvotes.includes(mongoUser._id)}
+              hasSaved={mongoUser?.saved.includes(question._id)}
+            />
+          </div>
         </div>
         {/* question details */}
         <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
@@ -93,7 +105,7 @@ const QuestionDetails = async ({ params }: any) => {
 
       {/* all answers  */}
       <AllAnswers
-        authorId={JSON.stringify(mongoUser._id)}
+        authorId={mongoUser._id}
         questionId={question._id}
         totalAnswers={question.answers.length}
       />

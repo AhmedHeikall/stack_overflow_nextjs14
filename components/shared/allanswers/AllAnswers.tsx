@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import Filter from "../filter/Filter";
+import Votes from "../votes/Votes";
 
 import { getAnswers } from "@/lib/actions/answer.action";
 import { AnswerFilters } from "@/constants/filters";
@@ -53,7 +54,17 @@ const AllAnswers = async ({ questionId, authorId, totalAnswers }: Props) => {
                     </p>
                   </div>
                 </Link>
-                <div className="flex justify-end">VOTING</div>
+                <div className="flex justify-end">
+                  <Votes
+                    type="answer"
+                    itemId={JSON.stringify(answer._id)}
+                    userId={JSON.stringify(authorId)}
+                    upvotes={answer.upvotes.length}
+                    hasupVoted={answer.upvotes.includes(authorId)}
+                    downvotes={answer.downvotes.length}
+                    hasdownVoted={answer.downvotes.includes(authorId)}
+                  />
+                </div>
               </div>
               {/* SPAN ID */}
             </div>

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { usePathname } from "next/navigation";
-import { SignedOut } from "@clerk/nextjs";
+import { SignedOut, SignedIn, SignOutButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 
 import { sidebarLinks } from "../../../constants/index";
@@ -83,6 +83,20 @@ const LeftSidebar = () => {
       </SignedOut>
 
       {/* Signed In */}
+      <SignedIn>
+        <SignOutButton>
+          <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+            <Image
+              src="/assets/icons/account.svg"
+              alt="signout"
+              width={20}
+              height={20}
+              className="invert-colors lg:hidden"
+            />
+            <span className="primary-text-gradient max-lg:hidden">Signout</span>
+          </Button>
+        </SignOutButton>
+      </SignedIn>
     </section>
   );
 };
