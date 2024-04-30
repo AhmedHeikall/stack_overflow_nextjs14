@@ -112,6 +112,8 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
       updateQuery = { $addToSet: { upvotes: userId } };
     }
 
+    // update question based on updateQuery
+    // new -> true -> create new document
     const question = await Question.findByIdAndUpdate(questionId, updateQuery, {
       new: true,
     });

@@ -40,6 +40,7 @@ const Votes = ({
 
   const handleVotes = async (voteType: string) => {
     if (!userId) {
+      // exit out this function
       return;
     }
 
@@ -52,6 +53,7 @@ const Votes = ({
           hasupVoted,
           path: pathname,
         });
+        // TODO: show a toast.
       } else if (type === "answer") {
         await upvoteAnswer({
           answerId: JSON.parse(itemId),
@@ -74,6 +76,7 @@ const Votes = ({
           hasupVoted,
           path: pathname,
         });
+        // TODO: show a toast.
       } else if (type === "answer") {
         await downvoteAnswer({
           answerId: JSON.parse(itemId),
