@@ -20,7 +20,7 @@ const Tags = async () => {
           route="/community"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
-          placeholder="Search for best minds here..."
+          placeholder="Search for tags..."
           otherClasses="flex-1"
         />
         <Filter

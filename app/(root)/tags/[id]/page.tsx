@@ -1,38 +1,31 @@
 import React from "react";
 
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
-import Filter from "@/components/shared/filter/Filter";
 import NoResult from "@/components/shared/noresult/NoResult";
 import QuestionCard from "@/components/cards/QuestionCard";
-import { QuestionFilters } from "@/constants/filters";
 
-import { getSavedQuestion } from "@/lib/actions/user.action";
-import { auth } from "@clerk/nextjs";
+import { getQusetionsByTagId } from "@/lib/actions/tag.action";
+import { URLProps } from "@/types";
 
-const Collection = async () => {
-  const { userId } = auth();
+const TagDetails = async ({ params, searchParams }: URLProps) => {
+  const tagId = params.id;
 
-  if (!userId) return null;
-
-  const results = await getSavedQuestion({
-    clerkId: userId,
+  const results = await getQusetionsByTagId({
+    tagId,
+    page: 1,
+    searchQuery: searchParams.q,
   });
-
   return (
     <>
-      <h1 className="h1-bold text-dark100_light900">Saved Questions</h1>
+      <h1 className="h1-bold text-dark100_light900">{results.tagTitle}</h1>
 
-      <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
+      <div className="mt-11 w-full">
         <LocalSearchbar
           route="/"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
-          placeholder="Search questions...."
+          placeholder="Search tag questions...."
           otherClasses="flex-1"
-        />
-        <Filter
-          filters={QuestionFilters}
-          otherClasses="min-h-[56px] sm:min-w-[170px]"
         />
       </div>
 
@@ -54,10 +47,10 @@ const Collection = async () => {
           ))
         ) : (
           <NoResult
-            title="There’s no saved question to show"
+            title="There’s no tag question to show"
             descrption=" Be the first to break the silence! 🚀 Ask a Question and kickstart the
-          discussion. our query could be the next big thing others learn from. Get
-          involved! 💡"
+      discussion. our query could be the next big thing others learn from. Get
+      involved! 💡"
             link="/ask-question"
             linkTitle="Ask a Question"
           />
@@ -67,4 +60,4 @@ const Collection = async () => {
   );
 };
 
-export default Collection;
+export default TagDetails;
