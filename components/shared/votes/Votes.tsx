@@ -3,7 +3,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { formatAndDivideNumber } from "@/lib/utils";
 import {
@@ -11,6 +11,7 @@ import {
   downvoteQuestion,
 } from "@/lib/actions/question.action";
 import { upvoteAnswer, downvoteAnswer } from "@/lib/actions/answer.action";
+import { toggleSaveQuestion } from "@/lib/actions/user.action";
 
 interface Props {
   type: string;
@@ -34,9 +35,14 @@ const Votes = ({
   hasSaved,
 }: Props) => {
   const pathname = usePathname();
-  const router = useRouter();
 
-  const handleSave = () => {};
+  const handleSave = async () => {
+    await toggleSaveQuestion({
+      userId: JSON.parse(userId),
+      questionId: JSON.parse(itemId),
+      path: pathname,
+    });
+  };
 
   const handleVotes = async (voteType: string) => {
     if (!userId) {
@@ -143,7 +149,7 @@ const Votes = ({
         <Image
           src={
             hasSaved
-              ? "/assets/icons/starfilled.svg"
+              ? "/assets/icons/star-filled.svg"
               : "/assets/icons/star-red.svg"
           }
           width={18}
