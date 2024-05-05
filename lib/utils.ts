@@ -56,3 +56,30 @@ export const formatAndDivideNumber = (inputNumber: number): string => {
     inputNumber >= 1000 ? (inputNumber >= 1000000 ? "M" : "K") : ""
   }`;
 };
+
+export function getJoinedDate(date: Date) {
+  // Get the month and year from the Date object
+  const month = date.getMonth(); // returns a value from 0 to 11
+  const year = date.getFullYear();
+
+  // Array of month names
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  // Construct the joined date string
+  const joinedDate = `${monthNames[month]} ${year}`;
+
+  return joinedDate;
+}

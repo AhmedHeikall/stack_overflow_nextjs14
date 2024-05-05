@@ -1,9 +1,11 @@
 "use server";
 
-import { FilterQuery } from "mongoose";
 import User from "@/database/user.model";
 import Tag from "@/database/tag.model";
 import Question from "@/database/question.model";
+import Answer from "@/database/answer.model";
+
+import { FilterQuery } from "mongoose";
 import { connectToDatabase } from "../mongoose";
 import { revalidatePath } from "next/cache";
 import {
@@ -13,6 +15,7 @@ import {
   GetAllUsersParams,
   ToggleSaveQuestionParams,
   GetSavedQuestionsParams,
+  GetUserByIdParams,
 } from "./shared.types";
 
 // import Question from "@/database/question.model";
@@ -26,6 +29,32 @@ export async function getUserById(params: any) {
     const user = await User.findOne({ clerkId: userId });
 
     return user;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function getUserInfo(params: GetUserByIdParams) {
+  try {
+    connectToDatabase();
+
+    const { userId } = params;
+
+    const user = await User.findOne({ clerkId: userId });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const totalQuestions = await Question.countDocuments({ author: user._id });
+    const totalAnswers = await Answer.countDocuments({ author: user._id });
+
+    return {
+      user,
+      totalQuestions,
+      totalAnswers,
+    };
   } catch (error) {
     console.log(error);
     throw error;
