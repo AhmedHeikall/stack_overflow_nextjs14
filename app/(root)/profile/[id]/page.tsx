@@ -9,6 +9,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getJoinedDate } from "@/lib/utils";
 import ProfileLink from "@/components/shared/profilelink/ProfileLink";
 import Stats from "@/components/shared/stats/Stats";
+import QuestionTab from "@/components/shared/profile_qa/QuestionTab";
+import AnswerTab from "@/components/shared/profile_qa/AnswerTab";
 
 const Profile = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
@@ -92,7 +94,13 @@ const Profile = async ({ params, searchParams }: URLProps) => {
               Answers
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="top-posts">QuestionTap</TabsContent>
+          <TabsContent value="top-posts">
+            <QuestionTab
+              searchParams={searchParams}
+              userId={userInfo?.user._id}
+              clerkId={clerkId}
+            />
+          </TabsContent>
           <TabsContent value="answers">AnswersTap</TabsContent>
         </Tabs>
       </div>
