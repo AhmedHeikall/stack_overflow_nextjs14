@@ -20,6 +20,7 @@ const AnswerTab = async ({ searchParams, userId, clerkId }: AnswerTabProps) => {
             <Answercard
               key={answer._id}
               _id={answer._id}
+              clerkId={answer.author.clerkId}
               question={answer.question}
               author={answer.author}
               upvotes={answer.upvotes}

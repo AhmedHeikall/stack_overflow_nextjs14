@@ -3,12 +3,15 @@ import Link from "next/link";
 
 import RenderTag from "../shared/tags/RenderTag";
 import Metric from "../shared/metric/Metric";
+import EditDeleteAction from "../shared/editdeleteactions/EditDeleteAction";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
+import { SignedIn, auth } from "@clerk/nextjs";
 
 interface HomeCardQuestionProps {
   _id: string;
+  clerkId: string;
   title: string;
-  author: { _id: string; name: string; picture: string };
+  author: { _id: string; name: string; picture: string; clerkId: string };
   tags: { _id: string; name: string }[];
   upvotes: Array<object>;
   views: number;
@@ -18,6 +21,7 @@ interface HomeCardQuestionProps {
 
 const QuestionCard = ({
   _id,
+  clerkId,
   title,
   author,
   tags,
@@ -26,6 +30,10 @@ const QuestionCard = ({
   answers,
   createdAt,
 }: HomeCardQuestionProps) => {
+  // compare current user clerkId with author clerkId if he is the author or not
+  const { userId: currentUser } = auth();
+  const showActionButton = currentUser && currentUser === author.clerkId;
+
   return (
     <div className=" background-light900_dark200  rounded-[10px]  p-9 shadow-md sm:px-11">
       {/* Title and (Date  in small devices) */}
@@ -42,6 +50,11 @@ const QuestionCard = ({
         </div>
 
         {/* If signed-in add edit delete question */}
+        <SignedIn>
+          {showActionButton && (
+            <EditDeleteAction type="question" itemId={JSON.stringify(_id)} />
+          )}
+        </SignedIn>
       </div>
 
       <div className="mt-3.5 flex flex-wrap gap-2">

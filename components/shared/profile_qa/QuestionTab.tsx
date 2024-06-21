@@ -15,6 +15,7 @@ const QuestionTab = async ({
   clerkId,
 }: QuestionTabProps) => {
   const results = await getUserQuestions({ userId, page: 1 });
+
   return (
     <>
       <div className="mt-10 flex w-full flex-col gap-6">
@@ -24,6 +25,7 @@ const QuestionTab = async ({
             <QuestionCard
               key={question._id}
               _id={question._id}
+              clerkId={question.author.clerkId}
               title={question.title}
               tags={question.tags}
               author={question.author}

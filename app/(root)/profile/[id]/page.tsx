@@ -15,6 +15,7 @@ import AnswerTab from "@/components/shared/profile_qa/AnswerTab";
 const Profile = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
   const userInfo = await getUserInfo({ userId: params.id });
+
   return (
     <>
       <div className="flex flex-col-reverse items-start justify-between sm:flex-row">
@@ -84,7 +85,7 @@ const Profile = async ({ params, searchParams }: URLProps) => {
         totalAnswers={userInfo.totalAnswers}
       />
 
-      <div className="mt-10 flex gap-10">
+      <div className="mt-10 flex w-full gap-10">
         <Tabs defaultValue="top-posts" className="w-[400px]">
           <TabsList className="background-light800_dark400 min-h-[42px] p-1">
             <TabsTrigger value="top-posts" className="tab">
