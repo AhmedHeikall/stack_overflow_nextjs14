@@ -11,9 +11,12 @@ import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
 
 import { getQuestions } from "@/lib/actions/question.action";
+import { SearchParamsProps } from "@/types";
 
-const Home = async () => {
-  const results = await getQuestions({});
+const Home = async ({ searchParams }: SearchParamsProps) => {
+  const results = await getQuestions({
+    searchQuery: searchParams.q,
+  });
 
   return (
     <>
