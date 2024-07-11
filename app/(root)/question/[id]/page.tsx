@@ -15,7 +15,7 @@ import { getTimestamp, formatAndDivideNumber } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
-const QuestionDetails = async ({ params }: any) => {
+const QuestionDetails = async ({ params, searchParams }: any) => {
   const question = await getQuestionById({ questionId: params.id });
 
   // get userId and pass it to Answer form to know who made an answer
@@ -108,6 +108,8 @@ const QuestionDetails = async ({ params }: any) => {
         authorId={mongoUser._id}
         questionId={question._id}
         totalAnswers={question.answers.length}
+        filter={searchParams?.filter}
+        page={searchParams?.page}
       />
 
       {/* answer form */}
