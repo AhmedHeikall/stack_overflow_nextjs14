@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import Filter from "../filter/Filter";
 import Votes from "../votes/Votes";
+import Pagination from "../pagination/Pagination";
 
 import { getAnswers } from "@/lib/actions/answer.action";
 import { AnswerFilters } from "@/constants/filters";
@@ -84,6 +85,8 @@ const AllAnswers = async ({
           </article>
         ))}
       </div>
+
+      <Pagination pageNumber={page ? +page : 1} isNext={result.isNext} />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import React from "react";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import NoResult from "@/components/shared/noresult/NoResult";
 import QuestionCard from "@/components/cards/QuestionCard";
+import Pagination from "@/components/shared/pagination/Pagination";
 
 import { getQusetionsByTagId } from "@/lib/actions/tag.action";
 import { URLProps } from "@/types";
@@ -12,7 +13,7 @@ const TagDetails = async ({ params, searchParams }: URLProps) => {
 
   const results = await getQusetionsByTagId({
     tagId,
-    page: 1,
+    page: searchParams.page ? +searchParams.page : 1,
     searchQuery: searchParams.q,
   });
   return (
@@ -56,6 +57,11 @@ const TagDetails = async ({ params, searchParams }: URLProps) => {
           />
         )}
       </div>
+
+      <Pagination
+        pageNumber={searchParams?.page ? +searchParams.page : 1}
+        isNext={results.isNext}
+      />
     </>
   );
 };

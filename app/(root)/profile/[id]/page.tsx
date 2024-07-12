@@ -85,8 +85,8 @@ const Profile = async ({ params, searchParams }: URLProps) => {
         totalAnswers={userInfo.totalAnswers}
       />
 
-      <div className="mt-10 flex w-full gap-10">
-        <Tabs defaultValue="top-posts" className="w-[400px]">
+      <div className="mt-10 flex  gap-10">
+        <Tabs defaultValue="top-posts" className="flex-1">
           <TabsList className="background-light800_dark400 min-h-[42px] p-1">
             <TabsTrigger value="top-posts" className="tab">
               Top Posts

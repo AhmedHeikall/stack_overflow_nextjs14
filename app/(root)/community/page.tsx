@@ -3,6 +3,7 @@ import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import Filter from "@/components/shared/filter/Filter";
 import NoResult from "@/components/shared/noresult/NoResult";
 import UserCard from "@/components/cards/UserCard";
+import Pagination from "@/components/shared/pagination/Pagination";
 import { getAllUsers } from "@/lib/actions/user.action";
 import { UserFilters } from "@/constants/filters";
 import { SearchParamsProps } from "@/types";
@@ -11,6 +12,7 @@ const Community = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllUsers({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
 
   return (
@@ -48,6 +50,11 @@ const Community = async ({ searchParams }: SearchParamsProps) => {
           />
         )}
       </div>
+
+      <Pagination
+        pageNumber={searchParams?.page ? +searchParams.page : 1}
+        isNext={result.isNext}
+      />
     </>
   );
 };
