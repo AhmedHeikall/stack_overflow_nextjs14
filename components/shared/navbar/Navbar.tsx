@@ -23,6 +23,7 @@ const Navbar = () => {
       </Link>
       {/* GlopalSearch */}
       <GlopalSearch />
+
       <div className="flex-between gap-5">
         <Theme />
         <SignedIn>
@@ -38,7 +39,11 @@ const Navbar = () => {
             }}
           />
         </SignedIn>
-        <MobileNav />
+
+        {/* 
+        TODO : need to maintenance
+        <MobileNav />  
+        */}
       </div>
     </nav>
   );
