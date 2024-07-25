@@ -40,10 +40,7 @@ const Navbar = () => {
           />
         </SignedIn>
 
-        {/* 
-        TODO : need to maintenance
-        <MobileNav />  
-        */}
+        <MobileNav />
       </div>
     </nav>
   );

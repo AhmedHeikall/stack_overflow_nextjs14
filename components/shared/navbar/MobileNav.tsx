@@ -67,26 +67,27 @@ const MobileNav = () => {
             </SheetClose>
           </div>
         </SignedOut>
+
+        {/* Signed In */}
+        <SignedIn>
+          <SignOutButton>
+            <SheetClose asChild>
+              <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+                <Image
+                  src="/assets/icons/account.svg"
+                  alt="signout"
+                  width={20}
+                  height={20}
+                  className="invert-colors lg:hidden"
+                />
+                <span className="primary-text-gradient max-lg:hidden">
+                  Signout
+                </span>
+              </Button>
+            </SheetClose>
+          </SignOutButton>
+        </SignedIn>
       </SheetContent>
-      {/* Signed In */}
-      <SignedIn>
-        <SignOutButton>
-          <SheetClose asChild>
-            <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-              <Image
-                src="/assets/icons/account.svg"
-                alt="signout"
-                width={20}
-                height={20}
-                className="invert-colors lg:hidden"
-              />
-              <span className="primary-text-gradient max-lg:hidden">
-                Signout
-              </span>
-            </Button>
-          </SheetClose>
-        </SignOutButton>
-      </SignedIn>
     </Sheet>
   );
 };
