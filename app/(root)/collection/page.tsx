@@ -50,6 +50,7 @@ const Collection = async ({ searchParams }: SearchParamsProps) => {
         {results.questions.length > 0 ? (
           results.questions.map((question: any) => (
             <QuestionCard
+              clerkId={userId}
               key={question._id}
               _id={question._id}
               title={question.title}
