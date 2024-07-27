@@ -4,6 +4,7 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 import { formatAndDivideNumber } from "@/lib/utils";
 import {
@@ -13,6 +14,7 @@ import {
 import { upvoteAnswer, downvoteAnswer } from "@/lib/actions/answer.action";
 import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { viewQuestion } from "@/lib/actions/interaction.action";
+import { map } from "svix/dist/openapi/rxjsStub";
 
 interface Props {
   type: string;
@@ -37,12 +39,20 @@ const Votes = ({
 }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
+  const { toast } = useToast();
 
   const handleSave = async () => {
     await toggleSaveQuestion({
       userId: JSON.parse(userId),
       questionId: JSON.parse(itemId),
       path: pathname,
+    });
+
+    //  show a toast.
+    toast({
+      title: `Saved Question ${!hasSaved ? "Successful" : "Removed !"}`,
+      variant: !hasSaved ? "default" : "destructive",
+      className: "bg-light-900 dark:bg-dark-300 text-dark300_light900",
     });
   };
 
@@ -61,7 +71,12 @@ const Votes = ({
           hasupVoted,
           path: pathname,
         });
-        // TODO: show a toast.
+        // show a toast.
+        return toast({
+          title: `Upvote ${!hasupVoted ? "Successful" : "Removed"}`,
+          variant: !hasupVoted ? "default" : "destructive",
+          className: `bg-light-900 dark:bg-dark-300 text-dark300_light900`,
+        });
       } else if (type === "answer") {
         await upvoteAnswer({
           answerId: JSON.parse(itemId),
@@ -71,8 +86,12 @@ const Votes = ({
           path: pathname,
         });
       }
-      // TODO: show a toast.
-      return;
+      // show a toast.
+      return toast({
+        title: `Upvote ${!hasupVoted ? "Successful" : "Removed"}`,
+        variant: !hasupVoted ? "default" : "destructive",
+        className: "bg-light-900 dark:bg-dark-300 text-dark300_light900",
+      });
     }
 
     if (voteType === "downvote") {
@@ -84,7 +103,12 @@ const Votes = ({
           hasupVoted,
           path: pathname,
         });
-        // TODO: show a toast.
+        //  show a toast.
+        return toast({
+          title: `Downvote ${!hasdownVoted ? "Successful" : "Removed"}`,
+          variant: !hasdownVoted ? "default" : "destructive",
+          className: "bg-light-900 dark:bg-dark-300 text-dark300_light900",
+        });
       } else if (type === "answer") {
         await downvoteAnswer({
           answerId: JSON.parse(itemId),
@@ -94,8 +118,12 @@ const Votes = ({
           path: pathname,
         });
       }
-      // TODO: show a toast.
-      return;
+      //  show a toast.
+      return toast({
+        title: `Downvote ${!hasdownVoted ? "Successful" : "Removed"}`,
+        variant: !hasdownVoted ? "default" : "destructive",
+        className: "bg-light-900 dark:bg-dark-300 text-dark300_light900",
+      });
     }
   };
 

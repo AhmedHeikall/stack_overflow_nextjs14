@@ -2,6 +2,7 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -39,6 +40,7 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const { toast } = useToast();
 
   const parsedQuestionDetails =
     questionDetails && JSON.parse(questionDetails || "");
@@ -69,6 +71,13 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
           path: pathname,
         });
 
+        //  show a toast.
+        toast({
+          title: `Edit question successfully`,
+          variant: "default",
+          className: "bg-light-900 dark:bg-dark-300 text-dark300_light900",
+        });
+
         // navigate to edited question
         router.push(`/question/${parsedQuestionDetails._id}`);
       } else {
@@ -79,6 +88,13 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
           tags: values.tags,
           author: JSON.parse(mongoUserId),
           path: pathname,
+        });
+
+        // show a toast.
+        toast({
+          title: `Create question successfully`,
+          variant: "default",
+          className: "bg-light-900 dark:bg-dark-300 text-dark300_light900",
         });
 
         // navigate to home page

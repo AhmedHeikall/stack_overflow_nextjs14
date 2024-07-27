@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useToast } from "@/components/ui/use-toast";
 
 import {
   Form,
@@ -33,6 +34,7 @@ const Answer = ({ authorId, questionId, question }: Props) => {
   const [isSubmittingAI, setIsSubmittingAI] = useState(false);
   const editorRef = useRef(null);
   const { mode } = useTheme();
+  const { toast } = useToast();
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof AnswerSchema>>({
@@ -52,6 +54,13 @@ const Answer = ({ authorId, questionId, question }: Props) => {
         author: JSON.parse(authorId),
         question: JSON.parse(questionId),
         path: pathname,
+      });
+
+      // show a toast.
+      toast({
+        title: `Answer created successfully`,
+        variant: "default",
+        className: "bg-light-900 dark:bg-dark-300 text-dark300_light900",
       });
 
       form.reset();

@@ -9,7 +9,7 @@ const Loading = () => {
         {[1, 2, 3, 4, 5].map((item) => (
           <Skeleton
             key={item}
-            className="background-light800_dark300 h-5 w-full rounded-2xl "
+            className="background-light800_dark300 h-32 w-full rounded-2xl "
           />
         ))}
       </div>
