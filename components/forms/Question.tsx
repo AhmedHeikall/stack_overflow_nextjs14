@@ -185,7 +185,7 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
               <FormControl className="mt-3.5">
                 {/* tiny editor */}
                 <Editor
-                  apiKey={`tts0pixw2984djmg8mmzbvbzvx5rc45kd0073q9knhdi2kae`}
+                  apiKey="tts0pixw2984djmg8mmzbvbzvx5rc45kd0073q9knhdi2kae"
                   onInit={(evt, editor) => {
                     // @ts-ignore
                     editorRef.current = editor;
