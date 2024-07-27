@@ -87,7 +87,7 @@ const GlopalSearch = () => {
           }}
           type="text"
           placeholder="Search anything globally..."
-          className="paragraph-regular no-focus placeholder text-dark400_light700 background-light800_darkgradient border-none  shadow-none outline-none dark:placeholder:text-slate-400"
+          className="paragraph-regular no-focus placeholder text-dark400_light700 border-none bg-transparent  shadow-none outline-none dark:placeholder:text-slate-400"
         />
       </div>
       {isOpen && <GlobalResult />}

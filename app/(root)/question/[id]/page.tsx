@@ -14,7 +14,12 @@ import { getUserById } from "@/lib/actions/user.action";
 import { getTimestamp, formatAndDivideNumber } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Question | Dev Overflow",
+  description: "Dev Overflow is a community of 1,000,000+ developers. join us.",
+};
 const QuestionDetails = async ({ params, searchParams }: any) => {
   const question = await getQuestionById({ questionId: params.id });
 

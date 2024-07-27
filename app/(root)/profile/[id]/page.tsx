@@ -11,6 +11,12 @@ import ProfileLink from "@/components/shared/profilelink/ProfileLink";
 import Stats from "@/components/shared/stats/Stats";
 import QuestionTab from "@/components/shared/profile_qa/QuestionTab";
 import AnswerTab from "@/components/shared/profile_qa/AnswerTab";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Profile | Dev Overflow",
+  description: "Dev Overflow is a community of 1,000,000+ developers. join us.",
+};
 
 const Profile = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();

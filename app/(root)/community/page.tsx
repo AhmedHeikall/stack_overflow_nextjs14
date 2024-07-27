@@ -7,6 +7,12 @@ import Pagination from "@/components/shared/pagination/Pagination";
 import { getAllUsers } from "@/lib/actions/user.action";
 import { UserFilters } from "@/constants/filters";
 import { SearchParamsProps } from "@/types";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Community | Dev Overflow",
+  description: "Dev Overflow is a community of 1,000,000+ developers. join us.",
+};
 
 const Community = async ({ searchParams }: SearchParamsProps) => {
   const result = await getAllUsers({

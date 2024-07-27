@@ -9,6 +9,12 @@ import { QuestionFilters } from "@/constants/filters";
 import { getSavedQuestion } from "@/lib/actions/user.action";
 import { auth } from "@clerk/nextjs";
 import { SearchParamsProps } from "@/types";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Collection | Dev Overflow",
+  description: "Dev Overflow is a community of 1,000,000+ developers. join us.",
+};
 
 const Collection = async ({ searchParams }: SearchParamsProps) => {
   const { userId } = auth();

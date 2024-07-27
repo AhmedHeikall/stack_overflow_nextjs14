@@ -1,5 +1,11 @@
 import React from "react";
 import NoResult from "@/components/shared/noresult/NoResult";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Jobs | Dev Overflow",
+  description: "Dev Overflow is a community of 1,000,000+ developers. join us.",
+};
 
 const Jobs = () => {
   return (

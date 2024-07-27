@@ -13,6 +13,15 @@ import { HomePageFilters } from "@/constants/filters";
 
 import { getQuestions } from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home | Dev Overflow",
+  description: "Dev Overflow is a community of 1,000,000+ developers. join us.",
+  openGraph: {
+    images: "/assets/images/img.png",
+  },
+};
 
 const Home = async ({ searchParams }: SearchParamsProps) => {
   const results = await getQuestions({
