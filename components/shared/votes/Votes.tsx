@@ -14,7 +14,6 @@ import {
 import { upvoteAnswer, downvoteAnswer } from "@/lib/actions/answer.action";
 import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { viewQuestion } from "@/lib/actions/interaction.action";
-import { map } from "svix/dist/openapi/rxjsStub";
 
 interface Props {
   type: string;

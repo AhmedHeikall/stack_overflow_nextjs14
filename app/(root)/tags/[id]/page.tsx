@@ -35,6 +35,7 @@ const TagDetails = async ({ params, searchParams }: URLProps) => {
         {results.questions.length > 0 ? (
           results.questions.map((question: any) => (
             <QuestionCard
+              clerkId={`1234hhh`}
               key={question._id}
               _id={question._id}
               title={question.title}
